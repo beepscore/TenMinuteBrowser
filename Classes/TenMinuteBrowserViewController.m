@@ -13,8 +13,7 @@
 #pragma mark properties
 @synthesize urlField;
 @synthesize webView;
-
-
+@synthesize activityIndicator;
 
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -69,6 +68,16 @@
     [self.webView goForward];
 }
 
+
+- (void)webViewDidStartLoad:webView {
+    [self.activityIndicator startAnimating];
+}
+
+
+- (void)webViewDidFinishLoad:webView {
+    [self.activityIndicator stopAnimating];
+}
+
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -95,6 +104,7 @@
     if (nil == newView) {
         self.urlField = nil;
         self.webView = nil;
+        self.activityIndicator = nil;
     }    
     [super setView:newView];
 }
@@ -103,6 +113,7 @@
 - (void)dealloc {
     [urlField release], urlField = nil;
     [webView release], webView = nil;
+    [activityIndicator release], activityIndicator = nil;
 
     [super dealloc];
 }

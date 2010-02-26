@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TenMinuteBrowserViewController : UIViewController <UITextFieldDelegate>{
+@interface TenMinuteBrowserViewController : UIViewController 
+<UITextFieldDelegate, UIWebViewDelegate> {
     UITextField *urlField;
     UIWebView *webView;
+    UIActivityIndicatorView *activityIndicator;
 }
 #pragma mark properties
 @property(nonatomic,retain)IBOutlet UITextField *urlField;
 @property(nonatomic,retain)IBOutlet UIWebView *webView;
+@property(nonatomic,retain)IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (IBAction)handleGoTapped;
 - (IBAction)handleGoBack;

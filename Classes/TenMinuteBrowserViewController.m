@@ -61,7 +61,13 @@
     return YES;
 }
 
+- (IBAction)handleGoBack {
+    [self.webView goBack];    
+}
 
+- (IBAction)handleGoForward {
+    [self.webView goForward];
+}
 
 /*
 // Override to allow orientations other than the default portrait orientation.

@@ -17,6 +17,8 @@
 @property(nonatomic,retain)IBOutlet UIWebView *webView;
 
 - (IBAction)handleGoTapped;
+- (IBAction)handleGoBack;
+- (IBAction)handleGoForward;
 
 @end
 

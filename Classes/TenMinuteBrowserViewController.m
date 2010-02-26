@@ -16,35 +16,47 @@
 @synthesize activityIndicator;
 
 /*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+ // The designated initializer. Override to perform setup that is required before the view is loaded.
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+ if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+ // Custom initialization
+ }
+ return self;
+ }
+ */
 
 /*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
+ // Implement loadView to create a view hierarchy programmatically, without using a nib.
+ - (void)loadView {
+ }
+ */
 
 
 /*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-*/
+ // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+ - (void)viewDidLoad {
+ [super viewDidLoad];
+ }
+ */
 
 - (void)loadURL {
-    NSURL *url = [[NSURL alloc] initWithString:urlField.text];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-    [self.webView loadRequest:request];
-    [request release];
-    [url release];
+    NSRange aboutRange = [self.urlField.text rangeOfString:@"about:"];
+	NSURL *url = NULL;
+	if (0 == aboutRange.location) {
+		// find the about page in bundle
+		NSString *aboutPath =
+        [[NSBundle mainBundle] pathForResource:@"aboutbook"
+                                        ofType:@"html"];
+		url = [[NSURL alloc] initFileURLWithPath:aboutPath];
+	} else {
+		url = [[NSURL alloc] initWithString:self.urlField.text];
+	}
+	if (url != NULL) {
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+        [self.webView loadRequest:request];
+        [request release];
+        [url release];
+    }
 }
 
 - (IBAction)handleGoTapped {
@@ -116,7 +128,7 @@
     [urlField release], urlField = nil;
     [webView release], webView = nil;
     [activityIndicator release], activityIndicator = nil;
-
+    
     [super dealloc];
 }
 
